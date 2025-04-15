@@ -15,6 +15,7 @@ uint64_t _test_arena_allocate(allocator_t *allocator, uint32_t number) {
 
 int main(int argc, char *argv[]) {
     test_t test = { .name="ARENA" };
+    test_initialize(&test, argc, argv);
     uint32_t struct_size = sizeof(struct _test_arena_struct);
 
     arena_t arena1;

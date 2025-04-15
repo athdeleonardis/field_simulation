@@ -67,6 +67,6 @@ MATH_NODE_TYPE math_node_get_type_left(MATH_NODE_TYPE type);
 MATH_NODE_TYPE math_node_get_type_right(MATH_NODE_TYPE type);
 
 /** Returns 1 if the types are correct, and 0 otherwise. */
-uint64_t math_tree_check_types(math_tree_node_t *);
+uint32_t math_tree_check_types(allocator_t *, math_tree_node_t *);
 
 #endif

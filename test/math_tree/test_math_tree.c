@@ -57,4 +57,6 @@ int main(int argc, char *argv[]) {
         math_tree_node_print(al, math_tree_vectors);
     }
     test_assert_equal_int(&test, math_tree_check_types(al, math_tree_vectors), 1, "Vectors Tree Type Check");
+
+    test_log_success(&test);
 }

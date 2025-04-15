@@ -14,16 +14,19 @@
 #define MATH_NAME const char*
 #define MATH_NODE_TYPE uint32_t
 
-#define MATH_NODE_MASK 0xF000
-#define MATH_NODE_CONSTANT 0x1000
-#define MATH_NODE_OPERATOR 0x2000
-#define MATH_NODE_SELECTOR 0x3000
-#define MATH_NODE_FIELD 0x4000
+#define MATH_MASK_VARIABILITY 0xF000
+#define MATH_MASK_TYPE 0x0F00
+#define MATH_MASK_TYPE_LEFT 0x00F0
+#define MATH_MASK_TYPE_RIGHT 0x000F
 
-#define MATH_TYPE_MASK 0x000F
+#define MATH_VARIABILITY_CONSTANT 0x1000
+#define MATH_VARIABILITY_OPERATOR 0x2000
+#define MATH_VARIABILITY_SELECTOR 0x3000
+#define MATH_VARIABILITY_FIELD 0x4000
+
 #define MATH_TYPE_NUMBER 0x0001
 #define MATH_TYPE_VECTOR 0x0002
-#define MATH_TYPE_SELECTOR 0x003
+#define MATH_TYPE_SELECTOR 0x0003
 
 #define MATH_OPERATOR_ID unsigned char
 #define MATH_OPERATOR_PLUS 1
@@ -58,7 +61,7 @@ struct math_tree_node {
 
 MATH_NODE_TYPE math_node_type(MATH_NODE_TYPE variability, MATH_NODE_TYPE type_output, MATH_NODE_TYPE type_input_left, MATH_NODE_TYPE type_input_right);
 /** Returns the variability of the node. */
-MATH_NODE_TYPE math_node_variability(MATH_NODE_TYPE type);
+MATH_NODE_TYPE math_node_get_variability(MATH_NODE_TYPE type);
 /** Returns the type of the node. */
 MATH_NODE_TYPE math_node_get_type(MATH_NODE_TYPE type);
 /** Returns the type of the left input of the operator node. */

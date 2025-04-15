@@ -24,7 +24,7 @@ void _math_tree_node_print(allocator_t *allocator, math_tree_node_t *node, int i
     if (indentation != 0)
         printf(MATH_TREE_PRINT_INDENTATION_START);
     _math_tree_type_print(node->type);
-    if (math_node_variability(node->type) == MATH_NODE_OPERATOR) {
+    if (math_node_get_variability(node->type) == MATH_VARIABILITY_OPERATOR) {
         math_tree_node_t *node_input = (math_tree_node_t *)allocation_get(allocator, node->operator.input_left);
         _math_tree_node_print(allocator, node_input, indentation + 1);
         node_input = (math_tree_node_t *)allocation_get(allocator, node->operator.input_right);
@@ -45,23 +45,23 @@ const char *_math_tree_type_string(MATH_NODE_TYPE type) {
 }
 
 void _math_tree_type_print(MATH_NODE_TYPE type) {
-    switch (math_node_variability(type)) {
-        case MATH_NODE_CONSTANT: {
+    switch (math_node_get_variability(type)) {
+        case MATH_VARIABILITY_CONSTANT: {
             printf("Constant: %s\n", _math_tree_type_string(math_node_get_type(type)));
             break;
         }
-        case MATH_NODE_OPERATOR: {
+        case MATH_VARIABILITY_OPERATOR: {
             const char *type_input_left = _math_tree_type_string(math_node_get_type_left(type));
             const char *type_input_right = _math_tree_type_string(math_node_get_type_right(type));
             const char *type_output = _math_tree_type_string(math_node_get_type(type));
             printf("Operator: %s -> %s -> %s\n", type_input_left, type_input_right, type_output);
             break;
         }
-        case MATH_NODE_FIELD: {
+        case MATH_VARIABILITY_FIELD: {
             printf("Field: %i\n", math_node_get_type(type));
             break;
         }
-        case MATH_NODE_SELECTOR: {
+        case MATH_VARIABILITY_SELECTOR: {
             printf("Selector: %i\n", math_node_get_type(type));
             break;
         }
